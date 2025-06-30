@@ -1,129 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ultimate AI Website & Code Generator (Emergent + Rosebud + Fireworks + Together)</title>
-<style>
-  /* Combined styling inspired by Emergent + Rosebud */
-  body {
-    margin: 0;
-    padding: 2rem;
-    background: #121212;
-    color: #eee;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  h1 {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  #container {
-    max-width: 900px;
-    margin: 0 auto;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  label {
-    font-weight: 600;
-    margin-top: 1rem;
-  }
-  textarea, input[type=text], select {
-    width: 100%;
-    background: #222;
-    border: none;
-    border-radius: 10px;
-    color: #eee;
-    font-size: 1.1rem;
-    padding: 1rem;
-    margin-top: 0.3rem;
-    resize: vertical;
-    box-sizing: border-box;
-    font-family: monospace;
-  }
-  button {
-    margin-top: 1.5rem;
-    padding: 1rem 2rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #0af;
-    color: #fff;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
-  }
-  button:hover {
-    background: #08c;
-  }
-  #output {
-    white-space: pre-wrap;
-    background: #222;
-    padding: 1rem;
-    border-radius: 12px;
-    margin-top: 2rem;
-    max-height: 300px;
-    overflow-y: auto;
-    font-family: monospace;
-    box-sizing: border-box;
-  }
-  #preview {
-    margin-top: 1.5rem;
-    width: 100%;
-    height: 400px;
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 0 25px #0af8;
-  }
-  .footer {
-    margin-top: auto;
-    font-size: 0.85rem;
-    color: #666;
-    text-align: center;
-    padding: 1rem 0 0;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ultimate AI Website & Code Generator</title>
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0; padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    #container {
+      max-width: 900px;
+      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+    select, input[type=text], textarea {
+      width: 100%;
+      background: #222;
+      border: none;
+      border-radius: 10px;
+      color: #eee;
+      font-size: 1.1rem;
+      padding: 1rem;
+      margin-top: 0.3rem;
+      box-sizing: border-box;
+      font-family: monospace;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #0af;
+      color: #fff;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+    }
+    button:hover {
+      background: #08c;
+    }
+    pre {
+      white-space: pre-wrap;
+      background: #222;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: monospace;
+      box-sizing: border-box;
+    }
+    iframe {
+      margin-top: 1.5rem;
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 0 25px #0af8;
+    }
+    .footer {
+      margin-top: auto;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+    .notice {
+      color: #f88;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
+  <div id="container">
+    <h1>Ultimate AI Website & Code Generator</h1>
 
-<div id="container">
-  <h1>Ultimate AI Website & Code Generator</h1>
+    <label for="providerSelect">Select AI Provider</label>
+    <select id="providerSelect" aria-label="Select AI Provider">
+      <option value="fireworks">Fireworks AI (API key required)</option>
+      <option value="together">Together AI (API key required)</option>
+      <option value="rosebud">Rosebud AI (no public API)</option>
+      <option value="emergent">Emergent AI (no public API)</option>
+      <option value="huggingface" selected>HuggingFace GPT-2 (free fallback, API key optional)</option>
+    </select>
 
-  <label for="providerSelect">Select AI Provider</label>
-  <select id="providerSelect" aria-label="Select AI Provider">
-    <option value="fireworks">Fireworks AI (requires API key)</option>
-    <option value="together">Together AI (requires API key)</option>
-    <option value="rosebud">Rosebud AI (no public API)</option>
-    <option value="emergent">Emergent AI (no public API)</option>
-    <option value="huggingface" selected>HuggingFace GPT-2 (free no-key fallback)</option>
-  </select>
+    <label for="apiKeyInput">API Key (if required)</label>
+    <input id="apiKeyInput" type="text" placeholder="Paste your API key here if needed" autocomplete="off" />
 
-  <label for="apiKeyInput">API Key (if required)</label>
-  <input id="apiKeyInput" type="text" placeholder="Paste your API key here if needed" autocomplete="off" />
+    <div id="noApiNotice" class="notice" style="display:none;">
+      This AI provider currently does not have a public API available.
+    </div>
 
-  <label for="promptInput">Enter your website or code prompt</label>
-  <textarea id="promptInput" rows="6" placeholder="Describe your website or code, e.g. &#10;A dark-themed portfolio with animations"></textarea>
+    <label for="promptInput">Enter your website or code prompt</label>
+    <textarea id="promptInput" rows="6" placeholder="Describe your website or code, e.g.&#10;A dark-themed portfolio with animations and contact form"></textarea>
 
-  <button id="generateBtn">Generate Website Code</button>
+    <button id="generateBtn">Generate Website Code</button>
 
-  <label for="output">Generated Code Output</label>
-  <pre id="output">Your AI-generated code will appear here.</pre>
+    <label for="output">Generated Code Output</label>
+    <pre id="output">Your AI generated code will appear here.</pre>
 
-  <label for="preview">Live Preview</label>
-  <iframe id="preview" sandbox="allow-scripts allow-same-origin"></iframe>
+    <label for="preview">Live Preview</label>
+    <iframe id="preview" sandbox="allow-scripts allow-same-origin"></iframe>
 
-  <div class="footer">
-    <p><strong>Note:</strong> Rosebud AI and Emergent AI currently have no public API access; this demo uses HuggingFace GPT-2 free API as fallback.</p>
-    <p>Fireworks AI and Together AI require API keys.</p>
-    <p>Max tokens set to 255 for API calls where applicable.</p>
+    <div class="footer">
+      <p><strong>Note:</strong> Fireworks AI & Together AI require API keys.</p>
+      <p>Rosebud AI and Emergent AI currently have no public APIs and show a message here.</p>
+      <p>HuggingFace GPT-2 fallback is free, requires no key (key optional for better rate limits).</p>
+      <p>Max tokens set to 255 for API calls.</p>
+    </div>
   </div>
-</div>
 
 <script>
   const providerSelect = document.getElementById('providerSelect');
@@ -132,6 +139,22 @@
   const generateBtn = document.getElementById('generateBtn');
   const output = document.getElementById('output');
   const preview = document.getElementById('preview');
+  const noApiNotice = document.getElementById('noApiNotice');
+
+  function updateApiNotice() {
+    const val = providerSelect.value;
+    if(val === 'rosebud' || val === 'emergent'){
+      noApiNotice.style.display = 'block';
+      apiKeyInput.disabled = true;
+      apiKeyInput.placeholder = '(No API key - provider has no public API)';
+    } else {
+      noApiNotice.style.display = 'none';
+      apiKeyInput.disabled = false;
+      apiKeyInput.placeholder = 'Paste your API key here if needed';
+    }
+  }
+  updateApiNotice();
+  providerSelect.addEventListener('change', updateApiNotice);
 
   generateBtn.addEventListener('click', async () => {
     const provider = providerSelect.value;
@@ -155,7 +178,7 @@
       let response, data, text;
 
       if (provider === 'fireworks') {
-        // Fireworks AI API call (replace with real endpoint and docs)
+        // Fireworks AI example API call (replace with actual API endpoint and format)
         response = await fetch('https://api.fireworks.ai/inference/v1/completions', {
           method: 'POST',
           headers: {
@@ -170,10 +193,10 @@
         });
         if (!response.ok) throw new Error(`Fireworks AI error: ${response.status} ${response.statusText}`);
         data = await response.json();
-        text = data.choices && data.choices[0] && data.choices[0].text ? data.choices[0].text : JSON.stringify(data, null, 2);
+        text = (data.choices && data.choices[0] && data.choices[0].text) ? data.choices[0].text : JSON.stringify(data, null, 2);
 
       } else if (provider === 'together') {
-        // Together AI API call (replace with real endpoint and docs)
+        // Together AI example API call (replace with actual API endpoint and format)
         response = await fetch('https://api.together.xyz/v1/completions', {
           method: 'POST',
           headers: {
@@ -188,20 +211,25 @@
         });
         if (!response.ok) throw new Error(`Together AI error: ${response.status} ${response.statusText}`);
         data = await response.json();
-        text = data.choices && data.choices[0] && data.choices[0].text ? data.choices[0].text : JSON.stringify(data, null, 2);
+        text = (data.choices && data.choices[0] && data.choices[0].text) ? data.choices[0].text : JSON.stringify(data, null, 2);
 
       } else if (provider === 'rosebud') {
-        // Rosebud AI - no public API
         text = "Rosebud AI currently has no public API for direct calls.\nPlease use their official platform.";
+
       } else if (provider === 'emergent') {
-        // Emergent AI - no public API
         text = "Emergent AI currently has no public API for direct calls.\nPlease use their official platform.";
+
       } else if (provider === 'huggingface') {
-        // HuggingFace GPT-2 no-key free public API
+        // HuggingFace GPT-2 no-key or with API key fallback
+        const headers = {'Content-Type': 'application/json'};
+        if(apiKey) headers['Authorization'] = 'Bearer ' + apiKey;
         response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 255 } })
+          headers: headers,
+          body: JSON.stringify({
+            inputs: prompt,
+            parameters: { max_new_tokens: 255, return_full_text: false }
+          })
         });
         if (!response.ok) throw new Error(`HuggingFace error: ${response.status} ${response.statusText}`);
         data = await response.json();
@@ -214,11 +242,17 @@
         text = "Unsupported AI provider selected.";
       }
 
+      // Cleanup generated code — trim after closing </html> tag for safety
+      const endIdx = text.toLowerCase().indexOf('</html>');
+      if(endIdx !== -1){
+        text = text.substring(0, endIdx + 7);
+      }
+
       output.textContent = text;
       preview.srcdoc = text;
 
-    } catch (err) {
-      output.textContent = 'Error: ' + err.message;
+    } catch (error) {
+      output.textContent = 'Error: ' + error.message;
     }
   });
 </script>
